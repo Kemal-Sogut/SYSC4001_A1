@@ -1,5 +1,10 @@
+0.000000, 50, CPU
 50, 1, switch to kernel mode
-51, 5, context saved
-56, 1, find vector 7 in memory position 0x000E
-57, 1, load address 0X00BD into the PC
-58.000000, 7, END_IO
+51, 10, context saved
+61, 1, find vector 7 in memory position 0x000E
+62, 1, load address 0X00BD
+ into the PC
+63.000000, 152, SYSCALL: Read
+103.000000, 1, IRET
+104.000000, 30, CPU
+134.000000, 152, END_IO: Store information

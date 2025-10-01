@@ -19,9 +19,11 @@ int main(int argc, char** argv) {
     std::string execution;  //!< string to accumulate the execution output
 
     /******************ADD YOUR VARIABLES HERE*************************/
+    std::string execution_temp;
     int x;
     int y;
-
+    int t_save = 10;
+    int t_isr_step = 40;
     std::string current_isr = ""; // Current ISR being executed
     float current_time = 0; // Current time in the simulation
     int device_number = -1; // Device number for the current interrupt
@@ -41,22 +43,27 @@ int main(int argc, char** argv) {
         //execute in format: time of the event, Duratin, activity.
         if (activity == "CPU"){
             //Simulate CPU activity
-            execution += std::to_string(current_time) + ", jhvjh " + std::to_string(duration_intr) + ", " + activity + "\n";
+            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", " + activity + "\n";
             current_time += duration_intr; // Update current time
 
         }
         else if (activity == "SYSCALL"){
             //Simulate activity
 
-            std::tie(execution, current_time) = intr_boilerplate(current_time, duration_intr, 5, vectors);
-            
+            std::tie(execution_temp, current_time) = intr_boilerplate(current_time, duration_intr, t_save, vectors);
+            execution += execution_temp;
+            execution += std::to_string(current_time) + ", " + std::to_string(delays.at(duration_intr)) + ", SYSCALL: Read" + "\n";
+            current_time += t_isr_step; // Update current time
+            execution += std::to_string(current_time) + ", 1" + ", IRET\n";
+            current_time++; // Update current time
+
+
+
         }
         else if (activity == "END_IO"){
             //Simulate END_IO activity
-            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", " + activity + "\n";
-            current_time += duration_intr; // Update current time
-
-
+            execution += std::to_string(current_time) + ", " + std::to_string(delays.at(duration_intr)) + ", END_IO: Store information" + "\n";
+            current_time += t_isr_step; // Update current time
         }
         else {
             std::cerr << "Error: Unknown activity type: " << activity << std::endl;  
