@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 
         }
         else {
-            std::cerr << "Error: Unknown activity type: " << activity << std::endl;e   
+            std::cerr << "Error: Unknown activity type: " << activity << std::endl;  
         }
         /************************************************************************/
 
