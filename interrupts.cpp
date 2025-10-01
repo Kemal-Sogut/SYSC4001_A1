@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
 
         }
         else if (activity == "SYSCALL"){
-            //Simulate SYSCALL activity
+            //Simulate activity
 
             std::tie(execution, current_time) = intr_boilerplate(current_time, duration_intr, 5, vectors);
             
@@ -59,8 +59,7 @@ int main(int argc, char** argv) {
 
         }
         else {
-            std::cerr << "Error: Unknown activity type: " << activity << std::endl;
-            
+            std::cerr << "Error: Unknown activity type: " << activity << std::endl;e   
         }
         /************************************************************************/
 
