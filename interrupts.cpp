@@ -5,10 +5,9 @@
  *
  */
 
-#include<stdio.h>
-#include"interrupts.hpp"
+#include "interrupts.hpp"
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv) { 
 
     //vectors is a C++ std::vector of strings that contain the address of the ISR
     //delays  is a C++ std::vector of ints that contain the delays of each device
@@ -20,7 +19,9 @@ int main(int argc, char** argv) {
     std::string execution;  //!< string to accumulate the execution output
 
     /******************ADD YOUR VARIABLES HERE*************************/
-    std::string current_activity = ""; // Current activity (main or ISR)
+    int x;
+    int y;
+
     std::string current_isr = ""; // Current ISR being executed
     float current_time = 0; // Current time in the simulation
     int device_number = -1; // Device number for the current interrupt
@@ -40,26 +41,29 @@ int main(int argc, char** argv) {
         //execute in format: time of the event, Duratin, activity.
         if (activity == "CPU"){
             //Simulate CPU activity
-            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", " + activity + "\n";
-            write_output(execution);
+            execution += std::to_string(current_time) + ", jhvjh " + std::to_string(duration_intr) + ", " + activity + "\n";
             current_time += duration_intr; // Update current time
 
         }
         else if (activity == "SYSCALL"){
+            //Simulate activity
 
-
+            std::tie(execution, current_time) = intr_boilerplate(current_time, duration_intr, 5, vectors);
+            
         }
         else if (activity == "END_IO"){
+            //Simulate END_IO activity
+            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", " + activity + "\n";
+            current_time += duration_intr; // Update current time
 
 
         }
-
         else {
-            std::cerr << "Error: Unknown activity type: " << activity << std::endl;
-            continue; // Skip to the next line
+            std::cerr << "Error: Unknown activity type: " << activity << std::endl;e   
         }
-
         /************************************************************************/
+
+
 
     }
 
