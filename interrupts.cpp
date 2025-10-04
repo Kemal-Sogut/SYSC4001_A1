@@ -47,24 +47,37 @@ int main(int argc, char** argv) {
             current_time += duration_intr; // Update current time
 
         }
+        
         else if (activity == "SYSCALL"){
-            //Simulate activity
+            int delaysRemaining = delays.at(duration_intr);
 
+            //Simulate activity
             std::tie(execution_temp, current_time) = intr_boilerplate(current_time, duration_intr, t_save, vectors);
             execution += execution_temp;
-            execution += std::to_string(current_time) + ", " + std::to_string(delays.at(duration_intr)) + ", SYSCALL: Read" + "\n";
+            execution += std::to_string(current_time) + ", " + std::to_string(t_isr_step) + ", SYSCALL: Read" + "\n";
             current_time += t_isr_step; // Update current time
+            delaysRemaining -= t_isr_step;
+            execution += std::to_string(current_time) + ", " + std::to_string(t_isr_step) + ", Transfer" + "\n";
+            current_time += t_isr_step; // Update current time
+            delaysRemaining -= t_isr_step;
+
+            execution += std::to_string(current_time) + ", " + std::to_string(delaysRemaining) + ", Checking errors" + "\n";
+            current_time += delaysRemaining; // Update current time
+
+            execution += std::to_string(current_time) + ", 1" + ", IRET\n";
+            current_time++; // Update current time
+        }
+
+        else if (activity == "END_IO"){
+            //Simulate END_IO activity
+
+            execution += std::to_string(current_time) + ", " + std::to_string(delays.at(duration_intr)) + ", END_IO: Store information" + "\n";
+            current_time += delays.at(duration_intr); // Update current time
             execution += std::to_string(current_time) + ", 1" + ", IRET\n";
             current_time++; // Update current time
 
-
-
         }
-        else if (activity == "END_IO"){
-            //Simulate END_IO activity
-            execution += std::to_string(current_time) + ", " + std::to_string(delays.at(duration_intr)) + ", END_IO: Store information" + "\n";
-            current_time += t_isr_step; // Update current time
-        }
+
         else {
             std::cerr << "Error: Unknown activity type: " << activity << std::endl;  
         }
