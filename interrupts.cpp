@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
         //execute in format: time of the event, Duratin, activity.
         if (activity == "CPU"){
             //Simulate CPU activity
-            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", BuRST" + activity + "\n";
+            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", Burst" + activity + "\n";
             current_time += duration_intr; // Update current time
 
         }
