@@ -23,11 +23,6 @@ int main(int argc, char** argv) {
     std::string execution_temp; // Temporary variable to store execution line
     int t_save = 10; // Context save/restore time
     int t_isr_step = 100; // ISR activity time
-    std::string execution_temp;
-    int x;
-    int y;
-    int t_save = 10;
-    int t_isr_step = 40;
     std::string current_isr = ""; // Current ISR being executed
     float current_time = 0; // Current time in the simulation
     int device_number = -1; // Device number for the current interrupt
@@ -48,15 +43,13 @@ int main(int argc, char** argv) {
         //execute in format: time of the event, Duratin, activity.
         if (activity == "CPU"){
             //Simulate CPU activity
-            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", " + activity + "\n";
-            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", " + activity + "\n";
+            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", BuRST" + activity + "\n";
             current_time += duration_intr; // Update current time
 
         }
         
         else if (activity == "SYSCALL"){
             delay_remain = delays.at(duration_intr);
-
             // Simulate activity
             std::tie(execution_temp, current_time) = intr_boilerplate(current_time, duration_intr, t_save, vectors);
             execution += execution_temp + std::to_string(current_time) + ", " + std::to_string(t_isr_step) + ", Read" + "\n";
@@ -92,7 +85,7 @@ int main(int argc, char** argv) {
         else if (activity == "END_IO"){
             // Simulate END_IO activity
             delay_remain = delays.at(duration_intr);
-            execution += std::to_string(current_time) + ", " + std::to_string(t_isr_step) + ", Store information in memory" + "\n";
+            execution += std::to_string(current_time) + ", " + std::to_string(t_isr_step) + ", ENDIO: run the ISR (device driver)" + "\n";
             current_time += t_isr_step; // Update current time
             
             // Check if there is still time left in delay
@@ -103,10 +96,10 @@ int main(int argc, char** argv) {
             }
 
             if (delay_remain > 0) { // Add remaining delay time to current time if there is still any so it adds up to delay time
-                execution += std::to_string(current_time) + ", " + std::to_string(delay_remain) + ", ENDIO: run the ISR (device driver)" + "\n";
+                execution += std::to_string(current_time) + ", " + std::to_string(delay_remain) + ", check device status" + "\n";
                 current_time += delay_remain; 
             } else { // Add ISR activity time
-                execution += std::to_string(current_time) + ", " + std::to_string(t_isr_step) + ", ENDIO: run the ISR (device driver)" + "\n";
+                execution += std::to_string(current_time) + ", " + std::to_string(t_isr_step) + ", check device status" + "\n";
                 current_time += t_isr_step;
             }
             execution += std::to_string(current_time) + ", 1" + ", IRET\n";
