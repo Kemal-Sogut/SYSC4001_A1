@@ -1,5 +1,45 @@
+0.000000, 50, CPU
 50, 1, switch to kernel mode
-51, 5, context saved
-56, 1, find vector 7 in memory position 0x000E
-57, 1, load address 0X00BD into the PC
-58.000000, 7, END_IO
+51, 10, context saved
+61, 1, find vector 8 in memory position 0x0010
+62, 1, load address 0X06EF into the PC
+63.000000, 100, Read
+163.000000, 100, Transfer
+263.000000, 800, Checking errors
+1063.000000, 1, IRET
+1064.000000, 1000, Store information in memory
+2064.000000, 1, IRET
+2065.000000, 100, CPU
+2165, 1, switch to kernel mode
+2166, 10, context saved
+2176, 1, find vector 10 in memory position 0x0014
+2177, 1, load address 0X07B0 into the PC
+2178.000000, 100, Read
+2278.000000, 100, Transfer
+2378.000000, 364, Checking errors
+2742.000000, 1, IRET
+2743.000000, 564, Store information in memory
+3307.000000, 1, IRET
+3308.000000, 20, CPU
+3328, 1, switch to kernel mode
+3329, 10, context saved
+3339, 1, find vector 12 in memory position 0x0018
+3340, 1, load address 0X03B9 into the PC
+3341.000000, 100, Read
+3441.000000, 100, Transfer
+3541.000000, 100, Checking errors
+3641.000000, 1, IRET
+3642.000000, 145, Store information in memory
+3787.000000, 1, IRET
+3788.000000, 80, CPU
+3868, 1, switch to kernel mode
+3869, 10, context saved
+3879, 1, find vector 7 in memory position 0x000E
+3880, 1, load address 0X00BD into the PC
+3881.000000, 100, Read
+3981.000000, 100, Transfer
+4081.000000, 100, Checking errors
+4181.000000, 1, IRET
+4182.000000, 152, Store information in memory
+4334.000000, 1, IRET
+4335.000000, 20, CPU
