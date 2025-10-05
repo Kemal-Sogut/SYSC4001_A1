@@ -30,6 +30,7 @@ int main(int argc, char** argv) {
     float device_duration = 0; // Duration of the current interrupt
     int hex_address = 0; // Hex address of the current ISR
     bool isr_executing = false; // Flag to indicate if an ISR is currently executing
+    int context_time = 10; //Save or restore context time changes from 10, to 20, to 30 ms
 
 
     /******************************************************************/
@@ -43,6 +44,7 @@ int main(int argc, char** argv) {
         //execute in format: time of the event, Duratin, activity.
         if (activity == "CPU"){
             //Simulate CPU activity
+            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", " + activity + "\n";
             execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", " + activity + "\n";
             current_time += duration_intr; // Update current time
 
@@ -68,6 +70,12 @@ int main(int argc, char** argv) {
         else {
             std::cerr << "Error: Unknown activity type: " << activity << std::endl;  
         }
+
+        //print time, device number
+        //split the duration into 4 steps for your ISR
+            //call device driver
+            //
+
         /************************************************************************/
 
 
