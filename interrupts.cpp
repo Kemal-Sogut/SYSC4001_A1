@@ -1,9 +1,11 @@
 /**
  *
  * @file interrupts.cpp
- * @author Sasisekhar Govind
+ * @author Kemal Sogut #101280677 & Shivaani Thyagarajah #
  *
  */
+
+
 
 #include "interrupts.hpp"
 
@@ -18,11 +20,11 @@ int main(int argc, char** argv) {
     std::string trace;      //!< string to store single line of trace file
     std::string execution;  //!< string to accumulate the execution output
 
-    /******************ADD YOUR VARIABLES HERE*************************/
+    /******************ADD YOUR VARIABLES HERE************************/
     
     std::string execution_temp; // Temporary variable to store execution line
     int t_save = 10; // Context save/restore time
-    int t_isr_step = 100; // ISR activity time
+    int t_isr_step = 200; // ISR activity time
     std::string current_isr = ""; // Current ISR being executed
     float current_time = 0; // Current time in the simulation
     int device_number = -1; // Device number for the current interrupt
